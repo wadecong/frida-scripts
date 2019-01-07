@@ -12,16 +12,15 @@ def on_message(message, data):
 
 
 def do_hook():
-
     #NSFile Hooker
     #Hooking the following methods:
-	#-createFileAtPat
+    #-createFileAtPat
     #NSFile Hooker
     #Hooking the following methods:
-	#-createFileAtPath
+    #-createFileAtPath
 
     # $methods: array containing native method names exposed by this object
-	
+    
     hook = """
 
     if(ObjC.available) {
@@ -47,10 +46,10 @@ def do_hook():
                 var obj = ObjC.Object(args[2]);
                 send("[+] File : " + obj.toString());
                 
-		var obj = ObjC.Object(args[3]);
+        var obj = ObjC.Object(args[3]);
                 send("[+] Content : " + obj.toString());
                 
-		var obj = ObjC.Object(args[4]);
+        var obj = ObjC.Object(args[4]);
                 send("[+] Attributes : " + obj.toString());
             }
         });

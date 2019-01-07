@@ -48,7 +48,7 @@ if __name__ == '__main__':
 
         params = {"filename":options.filename}
 
-        print "[*] Parsing hooks from %(filename)s" % params
+        print("[*] Parsing hooks from %(filename)s" % params)
 
         hook = open(params["filename"], "r")
         script = session.create_script(hook.read())

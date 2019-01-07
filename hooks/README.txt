@@ -1,4 +1,4 @@
 ################
 
-* To disable a hook, use ".disabled" extension.
-* To reenable it, use ".enabled" extension.
+* To disable a hook, use ".disabled.js" extension.
+* To reenable it, use ".enabled.js" extension.

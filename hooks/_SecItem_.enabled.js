@@ -5,13 +5,12 @@ for (index = 0; index < hookMethods.length; index++) {
 	var methodName = hookMethods[index];
 	var ptr = null;
 	Module.enumerateExports(className, {
-		onMatch: function(imp) {
+		onMatch: function (imp) {
 			if (imp.type == "function" && imp.name == methodName) {
 				send("Found target method : " + methodName);
-
 				try {
 					Interceptor.attach(ptr(imp.address), {
-						onEnter: function(args) {
+						onEnter: function (args) {
 							send("[+] Keychain operation: " + imp.name);
 							var params = ObjC.Object(args[0]); // CFDictionaryRef => NSDictionary
 							var keys = params.allKeys();
@@ -20,7 +19,7 @@ for (index = 0; index < hookMethods.length; index++) {
 								var v = params.objectForKey_(k);
 								if (k == "v_Data") {
 									var string = ObjC.classes.NSString.alloc();
-									v = string.initWithData_encoding_(v,4).toString();
+									v = string.initWithData_encoding_(v, 4).toString();
 								}
 								if (k == "pdmn") {
 									if (v == "ak") {
@@ -36,8 +35,8 @@ for (index = 0; index < hookMethods.length; index++) {
 									} else {
 										// v == dku
 										v = "kSecAttrAccessibleAlwaysThisDeviceOnly";
-									} 
-								} 
+									}
+								}
 								send("\t-   " + k + "=" + v);
 							}
 						}
@@ -48,7 +47,7 @@ for (index = 0; index < hookMethods.length; index++) {
 			}
 		},
 		onComplete: function (e) {
-				send("All methods loaded");
+			send("All methods loaded");
 		}
 	});
 }
