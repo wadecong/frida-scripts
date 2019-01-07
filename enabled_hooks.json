@@ -1,0 +1,6 @@
+{
+    "hooks": [
+        "_NSURLRequest_.js",
+        "_xpc.js"
+    ]
+}

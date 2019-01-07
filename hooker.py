@@ -1,6 +1,7 @@
 import frida
 import sys
 import os 
+import json
 from optparse import OptionParser
 
 def on_message(message, data):
@@ -11,6 +12,15 @@ def on_message(message, data):
         print(message)
         print(e)
 
+def get_enabled_hooks():
+    configs = ["enabled_hooks_local.json", "enabled_hooks.json"]
+    for config_file_name in configs:
+        if os.path.exists(config_file_name):
+            with open(config_file_name, "r") as f:
+                content = f.read()
+            config = json.loads(content)
+            return config["hooks"]
+    return []
 
 if __name__ == '__main__':
     try:
@@ -36,9 +46,9 @@ if __name__ == '__main__':
             print ("[X] Option not selected. View --help option.")
             sys.exit(0)
 
+        enabled_hooks = get_enabled_hooks()
         for filename in os.listdir(path):
-            is_enabled = filename.split(".")[-2]
-            if (is_enabled == "enabled"):
+            if filename in enabled_hooks:
                 print("[*] Parsing hook: "+filename)
                 hook = open(path+os.sep+filename, "r")
                 script = session.create_script(hook.read())

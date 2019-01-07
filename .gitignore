@@ -1,3 +1,4 @@
 .swp
 .vscode
 __handlers__/
+enabled_hooks_local.json
