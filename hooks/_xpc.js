@@ -9,7 +9,9 @@ function logger(tag) {
             const name = Memory.readUtf8String(xpc_connection_get_name(conn));
             console.log("xpc_connection_send_message_with_reply " + tag);
             console.log("connection: " + name);
-            console.log(new ObjC.Object(args[1]) + '');
+            var xpc_dictionary = new ObjC.Object(args[1]);
+            // var contents = xpc_dictionary.contents();
+            console.log(xpc_dictionary + '');
         },
         onLeave: function () { }
     }

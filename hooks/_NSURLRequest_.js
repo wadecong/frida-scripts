@@ -89,6 +89,16 @@ if (ObjC.available) {
 						send(" HTTP Request via [ " + receiver + " " + sel + " ] => DATA: " + string.initWithData_encoding_(data, 4));
 					}
 				});
+				var hook = ObjC.classes.NSMutableURLRequest["- setValue:forHTTPHeaderField:"];
+				Interceptor.attach(hook.implementation, {
+					onEnter: function (args) {
+						var receiver = new ObjC.Object(args[0]);
+						var sel = ObjC.selectorAsString(args[1]);
+						var value = ObjC.Object(args[2]);
+						var key = ObjC.Object(args[3]);
+						send(" HTTP Request via [ " + receiver + " " + sel + " ] => Set Header: " + key + " : " + value);
+					}
+				});
 			}
 
 		}
