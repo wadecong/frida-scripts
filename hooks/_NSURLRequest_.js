@@ -96,7 +96,14 @@ if (ObjC.available) {
 						var sel = ObjC.selectorAsString(args[1]);
 						var value = ObjC.Object(args[2]);
 						var key = ObjC.Object(args[3]);
-						send(" HTTP Request via [ " + receiver + " " + sel + " ] => Set Header: " + key + " : " + value);
+						if (key == "X-MMe-Nas-Session") {
+							send(" HTTP Request via [ " + receiver + " " + sel + " ] => Set Header: " + key + " : " + value);
+							console.log('\tBacktrace:\n\t' +
+								Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join('\n\t')
+							);
+							var module = Process.getModuleByName("AuthKit");
+							console.log('AuthKit base address: ' + module.base);
+						}
 					}
 				});
 			}

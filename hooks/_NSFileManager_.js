@@ -15,7 +15,7 @@ if (ObjC.available) {
 						send("\t- Content : " + string.initWithData_encoding_(obj, 4));
 
 						var obj = ObjC.Object(args[4]);
-						send("\t- Attributes : " + obj.toString());
+						send("\t- Attribu	tes : " + obj.toString());
 					}
 				});
 				var hook = ObjC.classes.NSFileManager["- copyItemAtPath:toPath:error:"];

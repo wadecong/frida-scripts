@@ -35,7 +35,8 @@ if __name__ == '__main__':
             print ("[*] Attaching to PID "+str(args[0]))
             session = frida.get_usb_device().attach(str(args[0]))
         elif (options.resume):
-            session = frida.get_usb_device().resume()
+            session = frida.get_usb_device().attach(str(args[0]))
+            frida.get_usb_device().resume(str(args[0]))
             sys.exit(0)
         else:
             print ("Error")

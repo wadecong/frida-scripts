@@ -12,6 +12,9 @@ function logger(tag) {
             var xpc_dictionary = new ObjC.Object(args[1]);
             // var contents = xpc_dictionary.contents();
             console.log(xpc_dictionary + '');
+            console.log('\tBacktrace:\n\t' +
+                Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join('\n\t')
+            );
         },
         onLeave: function () { }
     }
